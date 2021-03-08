@@ -115,7 +115,7 @@ namespace PhysisWeather.Core.Services
                     Number = govPeriod.Number,
                     StartTime = govPeriod.StartTime,
                     EndTime = govPeriod.EndTime,
-                    Name = govPeriod.Name,
+                    Name = govPeriod.Name.ToDisplayName(),
                     ShortDescription = govPeriod.ShortForecast,
                     LongDescription = govPeriod.DetailedForecast,
                     IsDaytime = govPeriod.IsDaytime,
