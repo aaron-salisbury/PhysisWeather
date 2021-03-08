@@ -1,0 +1,41 @@
+﻿
+    Logo "Cloudy" by Freepik.
+    https://www.flaticon.com/free-icon/cloudy_2204336
+
+    Page heading font "Some Time Later" by Fredrick Brennan.
+    https://www.fontsquirrel.com/fonts/some-time-later
+
+    Utilized 'SVG to UWP XAML Converter' by Dias.
+    https://www.microsoft.com/en-us/p/svg-to-uwp-xaml-converter/9p5rq15t5cwj
+
+    ********** WEATHER FORECAST ICONS **********
+
+        Metro Studio 5 by Syncfusion
+            Icons: AllClear, Snow, IcePellets, Thunderstorm
+        https://marketplace.visualstudio.com/items?itemName=SyncfusionInc.MetroStudio5
+
+        FreezingRain icon "Freezing Rain" by Jory Raphael from the Noun Project
+        https://thenounproject.com/term/freezing-rain/13560/
+
+        Rain icon "appbar.weather.chance" by Templarian from WindowsIcons
+        https://github.com/Templarian/WindowsIcons
+
+        Blizzard icon "Snowing" by Smashicons from Flaticon
+        https://www.flaticon.com/free-icon/snowing_136639
+
+        RainSnow icon "Snowing" by Freepik from Flaticon
+        https://www.flaticon.com/free-icon/snowing_615558
+
+        NotSet icon "Images Interface Symbol" by Freepik from Flaticon
+        https://www.flaticon.com/free-icon/images-interface-symbol_45009
+
+        "Weather Icon Pack" by Freepik from Flaticon
+            Icons: Hot, Cold, Windy
+        https://www.flaticon.com/packs/weather
+
+        Hurricane_TropicalStorm icon "Cyclone" by Those Icons from Flaticon
+        https://www.flaticon.com/free-icon/cyclone_798319
+
+        "Weather Icon Pack" by Those Icons from Flaticon
+            Icons: AllClearNight, SomeClouds, SomeCloudsNight, FunnelCloud_Tornado, MostlyClouds, Dust_Smoke_Haze_Fog
+        https://www.flaticon.com/packs/weather-63

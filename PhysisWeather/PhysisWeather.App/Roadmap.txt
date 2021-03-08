@@ -1,0 +1,8 @@
+﻿Fix hours source not updating right away.
+Time in hours control. Make first column of the list view row.
+Try to put list view inside of a Telerik HubTile and wrap the entire page in a scroll viewer.
+Zip code search.
+Default zip code search value using location service if users agree to it.
+Refresh button.
+Save weather service grid data locally to save a call when coordinates are the same.
+Have UserAgent be a required parameter of the weather service so calls can be distinguished by device ID.
