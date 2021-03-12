@@ -16,6 +16,16 @@ namespace PhysisWeather.App.ViewModels
     {
         private Dictionary<WeatherPeriod.IconTypes, ControlTemplate> _forecastIconCache;
 
+        private string _zipCode;
+        public string ZipCode
+        {
+            get => _zipCode;
+            set
+            {
+                Set(ref _zipCode, value);
+            }
+        }
+
         private ObservableCollection<WeatherData> _forecastDays;
         public ObservableCollection<WeatherData> ForecastDays
         {
@@ -68,19 +78,14 @@ namespace PhysisWeather.App.ViewModels
 
         public ForecastViewModel()
         {
+            Manager.PropertyChanged += Manager_OnPropertyChanged;
+
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                LoadForecastIconCacheAsync();
+                LoadForecastIconCache();
             });
 
-            //TODO: Use location service to create/set coordinates.
-            Manager.Coordinates = new Coordinates
-            {
-                Longitude = "-77.03637",
-                Latitude = "38.89511"
-            };
-
-            Manager.PropertyChanged += Manager_OnPropertyChanged;
+            //TODO: Set zip from coordinates.
 
             Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
         }
@@ -111,6 +116,16 @@ namespace PhysisWeather.App.ViewModels
                     ForecastHours = new ObservableCollection<WeatherData>();
                 }
             }
+            //else if (string.Equals(e.PropertyName, nameof(Core.Manager.Coordinates)))
+            //{
+            //    if (Manager?.Coordinates != null)
+            //    {
+            //        DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            //        {
+            //            Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
+            //        });
+            //    }
+            //}
         }
 
         private IEnumerable<WeatherData> BuildDataFromPeriods(List<WeatherPeriod> weatherPeriods)
@@ -129,7 +144,7 @@ namespace PhysisWeather.App.ViewModels
             return data;
         }
 
-        private void LoadForecastIconCacheAsync()
+        private void LoadForecastIconCache()
         {
             _forecastIconCache = new Dictionary<WeatherPeriod.IconTypes, ControlTemplate>();
 
