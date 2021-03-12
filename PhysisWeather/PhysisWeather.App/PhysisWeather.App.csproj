@@ -126,6 +126,9 @@
     <Compile Include="Base\Controls\MyAppBar.xaml.cs">
       <DependentUpon>MyAppBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Base\Controls\MySearchBox.xaml.cs">
+      <DependentUpon>MySearchBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Base\Extensions\EnumExtensions.cs" />
     <Compile Include="Base\Helpers\Animation.cs" />
     <Compile Include="Base\Helpers\ComboBoxEnumItem.cs" />
@@ -188,6 +191,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Base\Controls\MyAppBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Base\Controls\MySearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

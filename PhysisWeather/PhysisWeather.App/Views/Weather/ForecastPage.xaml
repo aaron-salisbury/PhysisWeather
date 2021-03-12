@@ -19,7 +19,9 @@
             <controls:MyAppBar.AppBarButtonsPanel>
                 <StackPanel Orientation="Horizontal">
                     <!-- TODO: Zip search and location info. -->
-                    <AppBarButton Label="Refresh" Command="{Binding RefreshCommand}">
+                    <controls:MySearchBox Height="30" Width="150" PlaceholderText="Zip Code" />
+
+                    <AppBarButton Label="Refresh" Command="{Binding RefreshCommand}" Margin="20,0,0,0">
                         <AppBarButton.Icon>
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72C;"/>
                         </AppBarButton.Icon>
