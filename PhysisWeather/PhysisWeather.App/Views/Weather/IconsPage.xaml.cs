@@ -1,4 +1,5 @@
 ﻿using PhysisWeather.App.ViewModels;
+using PhysisWeather.Core.Base.Extensions;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -58,7 +59,7 @@ namespace PhysisWeather.App.Views
 
                                 TextBlock iconLabel = new TextBlock
                                 {
-                                    Text = iconByType.Key.ToString(),
+                                    Text = iconByType.Key.ToString().Replace("_", "/").ToDisplayName(),
                                     Margin = new Thickness(0)
                                 };
 
