@@ -4,17 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:PhysisWeather.App.Base.Controls"
     xmlns:telerikPrimitives="using:Telerik.UI.Xaml.Controls.Primitives"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="{StaticResource SmallLeftRightBottomMargin}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="{StaticResource SmallLeftRightBottomMargin}">
+        <controls:MyAppBar Grid.Row="0" x:Name="AppBar" IsActive="{Binding IsBusy}">
+            <controls:MyAppBar.AppBarButtonsPanel>
+                <StackPanel Orientation="Horizontal">
+                    <!-- TODO: Zip search and location info. -->
+                </StackPanel>
+            </controls:MyAppBar.AppBarButtonsPanel>
+        </controls:MyAppBar>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="{StaticResource SmallLeftTopRightBottomMargin}">
             <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="8" ItemHeight="80" ItemWidth="80" >
                 <telerikPrimitives:RadCustomHubTile Width="315" Height="315" VariableSizedWrapGrid.ColumnSpan="4" VariableSizedWrapGrid.RowSpan="4" Background="{ThemeResource SystemAccentColor}">
                     <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -24,18 +33,18 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{Binding CurrentWeatherData.WeatherPeriod.NameAllCaps}" FontSize="32" FontWeight="Light" />
-                                <ContentControl Grid.Row="1" Template="{Binding CurrentWeatherData.Icon, Mode=OneWay}" Height="250" HorizontalAlignment="Left" Margin="0,0,0,-165" />
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.Temperature}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.NameAllCaps}" FontSize="32" FontWeight="Light" Width="190" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.Temperature}" FontSize="32" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="32" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                                    </StackPanel>
                                 </StackPanel>
-                                <TextBlock Grid.Row="3" Text="{Binding CurrentWeatherData.WeatherPeriod.LongDescription}" FontSize="20" FontWeight="Light" HorizontalAlignment="Left" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
+                                <ContentControl Grid.Row="1" Template="{Binding CurrentWeatherData.Icon, Mode=OneWay}" Height="250" HorizontalAlignment="Left" Margin="0,0,0,-165" />
+                                <TextBlock Grid.Row="2" Text="{Binding CurrentWeatherData.WeatherPeriod.LongDescription}" FontSize="20" FontWeight="Light" HorizontalAlignment="Left" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
                             </Grid>
                         </ScrollViewer>
-
                     </telerikPrimitives:RadCustomHubTile.FrontContent>
                 </telerikPrimitives:RadCustomHubTile>
 
@@ -49,7 +58,7 @@
                             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,3">
                                 <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.NameAllCaps}" FontSize="26" FontWeight="Light" />
                                 <ContentControl Template="{Binding NextWeatherData.Icon, Mode=OneWay}" Height="120" HorizontalAlignment="Left" Margin="25,-5,-40,-79" />
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,-2,0,0">
                                     <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.Temperature}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                     <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
                                 </StackPanel>
@@ -72,67 +81,77 @@
                         </Grid>
                     </telerikPrimitives:RadCustomHubTile.FrontContent>
                 </telerikPrimitives:RadCustomHubTile>
+
+                <telerikPrimitives:RadCustomHubTile Width="552" Height="237" VariableSizedWrapGrid.ColumnSpan="7" VariableSizedWrapGrid.RowSpan="3" Background="{ThemeResource SystemAccentColor}">
+                    <telerikPrimitives:RadCustomHubTile.FrontContent>
+                        <ListView
+                                Grid.Row="1"
+                                x:Name="HoursListView" 
+                                ItemsSource="{x:Bind ViewModel.ForecastHours}" 
+                                HorizontalAlignment="Left"
+                                Width="627"
+                                Background="{ThemeResource SystemAccentColor}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Left">
+                                        <Grid.ColumnDefinitions>
+                                            <!-- Time -->
+                                            <ColumnDefinition Width="335" />
+                                            <ColumnDefinition Width="10" />
+                                            <!-- Icon -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!-- Temp -->
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="10" />
+                                            <!-- Short Description -->
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                            <TextBlock 
+                                                Text="{Binding WeatherPeriod.ShortStartDate}" 
+                                                VerticalAlignment="Center" 
+                                                Foreground="White" 
+                                                FontWeight="Bold"
+                                                Margin="0,-1,0,0" />
+                                            <TextBlock 
+                                                Text="{Binding WeatherPeriod.ShortStartTime}"
+                                                VerticalAlignment="Center" 
+                                                Foreground="White" 
+                                                FontWeight="Bold"
+                                                Margin="20,-1,0,0" />
+                                        </StackPanel>
+
+                                        <ContentControl 
+                                            Grid.Row="2" 
+                                            Tag="ForecastIcon" 
+                                            Template="{Binding Icon, Mode=OneWay}" 
+                                            Width="85" 
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="35,0,0,-52"/>
+
+                                        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="-140,0,0,0">
+                                            <TextBlock Text="{Binding WeatherPeriod.Temperature}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,-4,0,0" />
+                                            <TextBlock Text="{Binding WeatherPeriod.TemperatureTypeShort}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="1,-4,0,0" />
+                                        </StackPanel>
+
+                                        <TextBlock 
+                                            Grid.Column="5"
+                                            Text="{Binding WeatherPeriod.ShortDescription}" 
+                                            VerticalAlignment="Center" 
+                                            Foreground="White" 
+                                            FontWeight="Bold"
+                                            TextWrapping="NoWrap"
+                                            TextTrimming="CharacterEllipsis"
+                                            Margin="-115,-1,0,0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </telerikPrimitives:RadCustomHubTile.FrontContent>
+                </telerikPrimitives:RadCustomHubTile>
             </VariableSizedWrapGrid>
         </ScrollViewer>
-
-        <ListView 
-            Grid.Row="1"
-            x:Name="DiceListView" 
-            ItemsSource="{x:Bind ViewModel.ForecastHours}" 
-            HorizontalAlignment="Left"
-            Width="627"
-            Margin="17,-7,0,0"
-            Background="{ThemeResource SystemAccentColor}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid HorizontalAlignment="Left">
-                        <Grid.ColumnDefinitions>
-                            <!-- Icon -->
-                            <ColumnDefinition Width="Auto" />
-                            <!-- Temp -->
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="10" />
-                            <!-- Time -->
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="10" />
-                            <!-- Short Description -->
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <ContentControl 
-                            Grid.Row="0" 
-                            Tag="ForecastIcon" 
-                            Template="{Binding Icon, Mode=OneWay}" 
-                            Width="85" 
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="0,0,-30,-52"/>
-
-                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding WeatherPeriod.Temperature}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,-4,0,0" />
-                            <TextBlock Text="{Binding WeatherPeriod.TemperatureTypeShort}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="1,-4,0,0" />
-                        </StackPanel>
-
-                        <TextBlock 
-                            Grid.Column="3"
-                            Text="Hour Goes Here" 
-                            VerticalAlignment="Center" 
-                            Foreground="White" 
-                            FontWeight="Bold"
-                            Margin="0,-1,0,0" />
-
-                        <TextBlock 
-                            Grid.Column="5"
-                            Text="{Binding WeatherPeriod.ShortDescription}" 
-                            VerticalAlignment="Center" 
-                            Foreground="White" 
-                            FontWeight="Bold"
-                            TextWrapping="NoWrap"
-                            TextTrimming="CharacterEllipsis"
-                            Margin="0,-1,0,0" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </Grid>
 </Page>

@@ -123,7 +123,11 @@
     <Compile Include="Base\Activation\DefaultActivationHandler.cs" />
     <Compile Include="Base\Behaviors\NavigationViewHeaderBehavior.cs" />
     <Compile Include="Base\Behaviors\NavigationViewHeaderMode.cs" />
+    <Compile Include="Base\Controls\MyAppBar.xaml.cs">
+      <DependentUpon>MyAppBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Base\Extensions\EnumExtensions.cs" />
+    <Compile Include="Base\Helpers\Animation.cs" />
     <Compile Include="Base\Helpers\ComboBoxEnumItem.cs" />
     <Compile Include="Base\Helpers\ElementFinder.cs" />
     <Compile Include="Base\Helpers\EnumToBooleanConverter.cs" />
@@ -183,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Base\Controls\MyAppBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Base\Styles\Page.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

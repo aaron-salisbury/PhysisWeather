@@ -7,6 +7,8 @@ namespace PhysisWeather.Core.Domains
     {
         public int Number { get; set; }
         public DateTime StartTime { get; set; }
+        public string ShortStartDate { get => $"{StartTime.Month}/{StartTime.Day}"; }
+        public string ShortStartTime { get => StartTime.ToString("h:mm tt"); }
         public DateTime EndTime { get; set; }
         public string Name { get; set; }
         public string NameAllCaps { get => Name?.ToUpper(); }
