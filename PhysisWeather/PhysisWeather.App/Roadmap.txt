@@ -2,11 +2,11 @@
 ☑ Use windows location service, if user approves.
 ☑ Time in hours control. Make first column of the list view row.
 ☑ Try to put list view inside of a Telerik HubTile and wrap the entire page in a scroll viewer.
+☑ Refresh button.
    Zip code search.
    General location info on screen, like city and state.
    Get zip using location service coordinates.
    Save zip locally and default search value with it.
-   Refresh button.
    Background service to refresh on a regular interval.
    Add screenshot to Readme.md
    Save weather service grid data locally to save a call when coordinates are the same.

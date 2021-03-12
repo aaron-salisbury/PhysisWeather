@@ -50,12 +50,12 @@ namespace PhysisWeather.App.ViewModels
         /// <param name="longRunningFunction">Action that performs long running synchronous process.</param>
         /// <param name="taskCommand">The command that when raised triggers this work.</param>
         /// <returns></returns>
-        public async Task InitiateProcessAsync(Func<bool> longRunningFunction, RelayCommand taskCommand)
+        public async Task InitiateProcessAsync(Func<bool> longRunningFunction, RelayCommand taskCommand, Action successAction = null, Action failureAction = null)
         {
             try
             {
                 IsBusy = true;
-                await InitiateProcess(longRunningFunction).ConfigureAwait(false);
+                await InitiateProcess(longRunningFunction, successAction, failureAction).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@ namespace PhysisWeather.App.ViewModels
             }
         }
 
-        private Task<bool> InitiateProcess(Func<bool> longRunningFunction)
+        private Task<bool> InitiateProcess(Func<bool> longRunningFunction, Action successAction, Action failureAction)
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
 
@@ -85,6 +85,21 @@ namespace PhysisWeather.App.ViewModels
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     processIsSuccessful = longRunningFunction.Invoke();
+
+                    if (processIsSuccessful)
+                    {
+                        if (successAction != null)
+                        {
+                            successAction.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        if (failureAction != null)
+                        {
+                            failureAction.Invoke();
+                        }
+                    }
                 });
 
                 tcs.SetResult(processIsSuccessful);

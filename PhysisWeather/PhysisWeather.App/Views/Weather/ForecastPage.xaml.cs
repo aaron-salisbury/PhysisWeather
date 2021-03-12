@@ -14,6 +14,9 @@ namespace PhysisWeather.App.Views
         {
             this.InitializeComponent();
             DataContext = ViewModel;
+
+            ViewModel.WorkflowSuccessAction = this.AppBar.AnimateSucess;
+            ViewModel.WorkflowFailureAction = this.AppBar.AnimateFailure;
         }
     }
 }

@@ -19,6 +19,11 @@
             <controls:MyAppBar.AppBarButtonsPanel>
                 <StackPanel Orientation="Horizontal">
                     <!-- TODO: Zip search and location info. -->
+                    <AppBarButton Label="Refresh" Command="{Binding RefreshCommand}">
+                        <AppBarButton.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72C;"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
                 </StackPanel>
             </controls:MyAppBar.AppBarButtonsPanel>
         </controls:MyAppBar>

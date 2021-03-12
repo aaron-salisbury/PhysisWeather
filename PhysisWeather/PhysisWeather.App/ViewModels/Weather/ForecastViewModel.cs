@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Threading;
+﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using PhysisWeather.App.Models;
 using PhysisWeather.Core.Domains;
 using System;
@@ -15,6 +16,11 @@ namespace PhysisWeather.App.ViewModels
     public class ForecastViewModel : BaseViewModel
     {
         private Dictionary<WeatherPeriod.IconTypes, ControlTemplate> _forecastIconCache;
+
+        public Action WorkflowSuccessAction { get; set; }
+        public Action WorkflowFailureAction { get; set; }
+
+        public RelayCommand RefreshCommand { get; }
 
         private string _zipCode;
         public string ZipCode
@@ -88,6 +94,8 @@ namespace PhysisWeather.App.ViewModels
             //TODO: Set zip from coordinates.
 
             Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
+
+            RefreshCommand = new RelayCommand(async () => await InitiateProcessAsync(Manager.Forecast, RefreshCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);
         }
 
         private void Manager_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
