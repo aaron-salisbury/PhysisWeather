@@ -126,9 +126,6 @@
     <Compile Include="Base\Controls\MyAppBar.xaml.cs">
       <DependentUpon>MyAppBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Base\Controls\MySearchBox.xaml.cs">
-      <DependentUpon>MySearchBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Base\Extensions\EnumExtensions.cs" />
     <Compile Include="Base\Helpers\Animation.cs" />
     <Compile Include="Base\Helpers\ComboBoxEnumItem.cs" />
@@ -140,7 +137,12 @@
     <Compile Include="Base\Extensions\SettingsStorageExtensions.cs" />
     <Compile Include="Base\Helpers\UI.cs" />
     <Compile Include="Base\Services\ActivationService.cs" />
+    <Compile Include="Base\Services\BigDataCloudReverseGeocodingService.cs" />
     <Compile Include="Base\Services\NavigationServiceEx.cs" />
+    <Compile Include="Base\Services\ServiceDomains\BigDataCloud\BigDataCloudAdministrative.cs" />
+    <Compile Include="Base\Services\ServiceDomains\BigDataCloud\BigDataCloudInformative.cs" />
+    <Compile Include="Base\Services\ServiceDomains\BigDataCloud\BigDataCloudLocalityInfo.cs" />
+    <Compile Include="Base\Services\ServiceDomains\BigDataCloud\BigDataCloudRoot.cs" />
     <Compile Include="Base\Services\ThemeSelectorService.cs" />
     <Compile Include="Models\WeatherData.cs" />
     <Compile Include="ShellPage.xaml.cs">
@@ -191,10 +193,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Base\Controls\MyAppBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Base\Controls\MySearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

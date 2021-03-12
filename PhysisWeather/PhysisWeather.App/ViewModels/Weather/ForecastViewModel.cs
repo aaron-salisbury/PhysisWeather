@@ -21,6 +21,7 @@ namespace PhysisWeather.App.ViewModels
         public Action WorkflowFailureAction { get; set; }
 
         public RelayCommand RefreshCommand { get; }
+        public RelayCommand SearchZipCommand { get; }
 
         private string _zipCode;
         public string ZipCode

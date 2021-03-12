@@ -19,7 +19,18 @@
             <controls:MyAppBar.AppBarButtonsPanel>
                 <StackPanel Orientation="Horizontal">
                     <!-- TODO: Zip search and location info. -->
-                    <controls:MySearchBox Height="30" Width="150" PlaceholderText="Zip Code" />
+                    <!--<controls:MySearchBox Height="30" Width="150" PlaceholderText="Zip Code" />-->
+
+                    <AutoSuggestBox
+                        x:Name="ZipCodeSearchBox"
+                        VerticalAlignment="Center"
+                        PlaceholderText="5 Digit Zip Code"
+                        QueryIcon="Find"
+                        Width="150"
+                        BorderThickness="0"
+                        CornerRadius="0"
+                        QuerySubmitted="ZipCodeSearchBox_OnQuerySubmitted"
+                        TextChanged="ZipCodeSearchBox_OnTextChanged" />
 
                     <AppBarButton Label="Refresh" Command="{Binding RefreshCommand}" Margin="20,0,0,0">
                         <AppBarButton.Icon>
@@ -42,13 +53,13 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.NameAllCaps}" FontSize="32" FontWeight="Light" Width="190" />
+                                    <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.NameAllCaps}" FontSize="26" FontWeight="Light" Width="226" />
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.Temperature}" FontSize="32" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                        <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="32" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                                        <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.Temperature}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding CurrentWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
                                     </StackPanel>
                                 </StackPanel>
-                                <ContentControl Grid.Row="1" Template="{Binding CurrentWeatherData.Icon, Mode=OneWay}" Height="250" HorizontalAlignment="Left" Margin="0,0,0,-165" />
+                                <ContentControl Grid.Row="1" Template="{Binding CurrentWeatherData.Icon, Mode=OneWay}" Height="260" HorizontalAlignment="Left" Margin="0,0,0,-165" />
                                 <TextBlock Grid.Row="2" Text="{Binding CurrentWeatherData.WeatherPeriod.LongDescription}" FontSize="20" FontWeight="Light" HorizontalAlignment="Left" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
                             </Grid>
                         </ScrollViewer>

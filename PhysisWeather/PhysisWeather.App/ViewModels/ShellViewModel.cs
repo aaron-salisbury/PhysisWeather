@@ -1,9 +1,11 @@
-﻿using PhysisWeather.Core;
+﻿using PhysisWeather.App.Base.Services;
+using PhysisWeather.Core;
 using PhysisWeather.Core.Base;
 using PhysisWeather.Core.Domains;
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Services.Maps;
 using Windows.UI.Xaml;
 
 namespace PhysisWeather.App.ViewModels
@@ -45,13 +47,19 @@ namespace PhysisWeather.App.ViewModels
 
                 if (geoposition != null && geoposition.Coordinate != null)
                 {
-                    if (geoposition.Coordinate != null)
+                    if (geoposition.Coordinate != null && geoposition.Coordinate.Point != null)
                     {
-                        Manager.Coordinates = new Coordinates
-                        {
-                            Longitude = geoposition.Coordinate.Point?.Position.Longitude.ToString(),
-                            Latitude = geoposition.Coordinate.Point?.Position.Latitude.ToString()
-                        };
+                        //Coordinates coordinates = new Coordinates
+                        //{
+                        //    Longitude = geoposition.Coordinate.Point?.Position.Longitude.ToString(),
+                        //    Latitude = geoposition.Coordinate.Point?.Position.Latitude.ToString()
+                        //};
+
+                        string zip = BigDataCloudReverseGeocodingService.GetZip(
+                            geoposition.Coordinate.Point.Position.Longitude, 
+                            geoposition.Coordinate.Point.Position.Latitude);
+
+                        Manager.BuildDemographicData(zip);
                     }
                 }
             }
