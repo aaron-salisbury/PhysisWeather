@@ -10,7 +10,7 @@ namespace PhysisWeather.Core.Data
 {
     public class WebRequests
     {
-        internal static async Task<string> GetCurlResponseAsync(string curlURL, ILogger logger, Dictionary<string, string> requestHeaders = null)
+        public static async Task<string> GetCurlResponseAsync(string curlURL, ILogger logger, Dictionary<string, string> requestHeaders = null)
         {
             try
             {

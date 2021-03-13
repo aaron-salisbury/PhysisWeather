@@ -92,8 +92,6 @@ namespace PhysisWeather.App.ViewModels
                 LoadForecastIconCache();
             });
 
-            //TODO: Set zip from coordinates.
-
             Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
 
             RefreshCommand = new RelayCommand(async () => await InitiateProcessAsync(Manager.Forecast, RefreshCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);

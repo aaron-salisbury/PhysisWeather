@@ -31,11 +31,16 @@ namespace PhysisWeather.App.ViewModels
             AppLogger = new AppLogger();
             Manager = new Manager(AppLogger);
 
-            Task.Run(() => SetLocationCoordinatesAsync()).Wait();
+            Task.Run(() => SetDemographicDataAsync()).Wait();
         }
 
-        private async Task SetLocationCoordinatesAsync()
+        private async Task SetDemographicDataAsync()
         {
+            Manager.DemographicData = null;
+
+            //TODO: This seems to break if permission isn't already granted.
+            //      Hasn't even been asking to grant permission.
+            //      Maybe try to set it up in a switch like template studio does.
             if (await Geolocator.RequestAccessAsync() == GeolocationAccessStatus.Allowed)
             {
                 Geolocator geolocator = new Geolocator
@@ -49,22 +54,17 @@ namespace PhysisWeather.App.ViewModels
                 {
                     if (geoposition.Coordinate != null && geoposition.Coordinate.Point != null)
                     {
-                        //Coordinates coordinates = new Coordinates
-                        //{
-                        //    Longitude = geoposition.Coordinate.Point?.Position.Longitude.ToString(),
-                        //    Latitude = geoposition.Coordinate.Point?.Position.Latitude.ToString()
-                        //};
-
-                        string zip = BigDataCloudReverseGeocodingService.GetZip(
+                        string zip = await BigDataCloudReverseGeocodingService.GetZipAsync(
                             geoposition.Coordinate.Point.Position.Longitude, 
-                            geoposition.Coordinate.Point.Position.Latitude);
+                            geoposition.Coordinate.Point.Position.Latitude,
+                            AppLogger);
 
                         Manager.BuildDemographicData(zip);
                     }
                 }
             }
 
-            //TODO: If coordinates are null, try loading saved ones.
+            //TODO: If Manager.DemographicData is null, try loading saved data.
         }
     }
 }

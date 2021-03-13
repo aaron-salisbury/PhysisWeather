@@ -1,4 +1,5 @@
 ﻿using PhysisWeather.App.Base.Services.ServiceDomains;
+using PhysisWeather.Core.Base;
 using PhysisWeather.Core.Base.Helpers;
 using PhysisWeather.Core.Data;
 using System;
@@ -19,12 +20,12 @@ namespace PhysisWeather.App.Base.Services
         /// from client devices using their own current coordinates only.
         /// IMPORTANT! Using elsewhere obtained coordinates with BigDataCloud's free API services can lead to blacklisting.
         /// </summary>
-        public static string GetZip(double longitude, double latitude)
+        public static async Task<string> GetZipAsync(double longitude, double latitude, AppLogger appLogger)
         {
             try
             {
                 string url = string.Format(URL_FORMAT, latitude, longitude);
-                string json = await WebRequests.GetCurlResponseAsync(url, _logger);
+                string json = await WebRequests.GetCurlResponseAsync(url, appLogger.Logger);
                 BigDataCloudRoot root = await Json.ToObjectAsync<BigDataCloudRoot>(json);
 
                 return root?.Postcode;
