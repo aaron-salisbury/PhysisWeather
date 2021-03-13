@@ -86,7 +86,7 @@ namespace PhysisWeather.Core.Services
             return null;
         }
 
-        private static List<WeatherPeriod> ConvertPeriods(IEnumerable<WeatherGovPeriod> govPeriods, bool isHours = false)
+        private List<WeatherPeriod> ConvertPeriods(IEnumerable<WeatherGovPeriod> govPeriods, bool isHours = false)
         {
             if (govPeriods == null)
             {
@@ -132,7 +132,7 @@ namespace PhysisWeather.Core.Services
             return days;
         }
 
-        private static WeatherPeriod.IconTypes GetIconType(string govIcon, bool isDaytime)
+        private WeatherPeriod.IconTypes GetIconType(string govIcon, bool isDaytime)
         {
             // weather.gov provides an "Icon" property like "https://api.weather.gov/icons/land/day/skc?size=medium"
             string broadWeatherGovIconType = govIcon?.GetAfterLastOrEmpty("/").GetUntilOrEmpty("?");
@@ -225,6 +225,7 @@ namespace PhysisWeather.Core.Services
                     break;
                 default:
                     iconType = WeatherPeriod.IconTypes.NotSet;
+                    _logger.Warning($"Was not able to extrapolate icon from Weather.Gov URL {govIcon}");
                     break;
             }
 
