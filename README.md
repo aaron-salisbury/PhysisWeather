@@ -15,11 +15,9 @@ Page heading font "[Some Time Later](https://www.fontsquirrel.com/fonts/some-tim
 
 **Weather Forecast Icons**
 
-  - [Metro Studio 5](https://marketplace.visualstudio.com/items?itemName=SyncfusionInc.MetroStudio5) by Syncfusion
+  - AllClear icon "Weather-02" by Syncfusion from [Metro Studio 5](https://marketplace.visualstudio.com/items?itemName=SyncfusionInc.MetroStudio5)
   - FreezingRain icon "[Freezing Rain](https://thenounproject.com/term/freezing-rain/13560/)" by Jory Raphael from the Noun Project
-  - Rain icon "[appbar.weather.chance](https://github.com/Templarian/WindowsIcons)" by Templarian from WindowsIcons
   - Blizzard icon "[Snowing](https://www.flaticon.com/free-icon/snowing_136639)" by Smashicons from Flaticon
-  - RainSnow icon "[Snowing](https://www.flaticon.com/free-icon/snowing_615558)" by Freepik from Flaticon
   - NotSet icon "[Images Interface Symbol](https://www.flaticon.com/free-icon/images-interface-symbol_45009)" by Freepik from Flaticon
   - "[Weather Icon Pack](https://www.flaticon.com/packs/weather)" by Freepik from Flaticon
   - Hurricane_TropicalStorm icon "[Cyclone](https://www.flaticon.com/free-icon/cyclone_798319)" by Those Icons from Flaticon
