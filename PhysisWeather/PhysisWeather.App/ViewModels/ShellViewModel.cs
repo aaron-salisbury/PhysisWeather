@@ -1,11 +1,9 @@
 ﻿using PhysisWeather.App.Base.Services;
 using PhysisWeather.Core;
 using PhysisWeather.Core.Base;
-using PhysisWeather.Core.Domains;
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Services.Maps;
 using Windows.UI.Xaml;
 
 namespace PhysisWeather.App.ViewModels
@@ -53,9 +51,8 @@ namespace PhysisWeather.App.ViewModels
 
                 if (geoposition != null && geoposition.Coordinate != null && geoposition.Coordinate.Point != null)
                 {
-                    string zip = await BigDataCloudReverseGeocodingService.GetZipAsync(geoposition, AppLogger);
-
-                    Manager.BuildDemographicData(zip);
+                    Manager.SearchZip = await BigDataCloudReverseGeocodingService.GetZipAsync(geoposition, AppLogger);
+                    Manager.BuildDemographicData();
                 }
             }
 

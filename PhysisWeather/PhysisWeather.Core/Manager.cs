@@ -25,16 +25,16 @@ namespace PhysisWeather.Core
             }
         }
 
-        //private Coordinates _coordinates;
-        //public Coordinates Coordinates
-        //{
-        //    get => _coordinates;
-        //    set
-        //    {
-        //        _coordinates = value;
-        //        RaisePropertyChanged();
-        //    }
-        //}
+        private string _searchZip;
+        public string SearchZip
+        {
+            get => _searchZip;
+            set
+            {
+                _searchZip = value;
+                RaisePropertyChanged();
+            }
+        }
 
         private WeatherForecast _weatherForecast;
         public WeatherForecast WeatherForecast
@@ -53,6 +53,43 @@ namespace PhysisWeather.Core
             _coordinateService = new FrostlineCoordinateService(_logger);
             _cityService = new ZiptasticCityService(_logger);
             _weatherService = new WeatherGovWeatherService(_logger);
+        }
+
+        public bool BuildDemographicData()
+        {
+            Coordinates coordinates = null;
+            try
+            {
+                _logger.Information("Building coordinates.");
+
+                coordinates = Task.Run(() => _coordinateService.GetCoordinatesAsync(SearchZip)).Result;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Failed to build coordinates: {e.Message}");
+                return false;
+            }
+
+            CityData cityData = null;
+            try
+            {
+                _logger.Information("Building city data.");
+
+                cityData = Task.Run(() => _cityService.GetCityDataAsync(SearchZip)).Result;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Failed to build city data: {e.Message}");
+                return false;
+            }
+
+            DemographicData = new DemographicData
+            {
+                Coordinates = coordinates,
+                CityData = cityData
+            };
+
+            return true;
         }
 
         public bool Forecast()
@@ -87,43 +124,6 @@ namespace PhysisWeather.Core
                 _logger.Error("Failed to build weather data.");
                 return false;
             }
-        }
-
-        public bool BuildDemographicData(string zip)
-        {
-            Coordinates coordinates = null;
-            try
-            {
-                _logger.Information("Building coordinates.");
-
-                coordinates = Task.Run(() => _coordinateService.GetCoordinatesAsync(zip)).Result;
-            }
-            catch (Exception e)
-            {
-                _logger.Error($"Failed to build coordinates: {e.Message}");
-                return false;
-            }
-
-            CityData cityData = null;
-            try
-            {
-                _logger.Information("Building city data.");
-
-                cityData = Task.Run(() => _cityService.GetCityDataAsync(zip)).Result;
-            }
-            catch (Exception e)
-            {
-                _logger.Error($"Failed to build city data: {e.Message}");
-                return false;
-            }
-
-            DemographicData = new DemographicData
-            {
-                Coordinates = coordinates,
-                CityData = cityData
-            };
-
-            return true;
         }
     }
 }

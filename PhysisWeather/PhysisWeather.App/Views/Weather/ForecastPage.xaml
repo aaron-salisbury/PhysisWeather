@@ -150,9 +150,9 @@
                                             Width="85" 
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Margin="35,0,0,-52"/>
+                                            Margin="10,0,0,-52"/>
 
-                                        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="-140,0,0,0">
+                                        <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="-165,0,0,0">
                                             <TextBlock Text="{Binding WeatherPeriod.Temperature}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="0,-4,0,0" />
                                             <TextBlock Text="{Binding WeatherPeriod.TemperatureTypeShort}" FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="1,-4,0,0" />
                                         </StackPanel>
@@ -165,7 +165,7 @@
                                             FontWeight="Bold"
                                             TextWrapping="NoWrap"
                                             TextTrimming="CharacterEllipsis"
-                                            Margin="-115,-1,0,0" />
+                                            Margin="-160,-1,0,0" />
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

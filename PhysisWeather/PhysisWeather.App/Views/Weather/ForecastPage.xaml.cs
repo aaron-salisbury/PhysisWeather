@@ -22,6 +22,7 @@ namespace PhysisWeather.App.Views
         private void ZipCodeSearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             //TODO: Us zip to find coordinats. Then update location fields and conduct forecast.
+            ViewModel.SearchZipCommand.Execute(null);
         }
 
         private void ZipCodeSearchBox_OnTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

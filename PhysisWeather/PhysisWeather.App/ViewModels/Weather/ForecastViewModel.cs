@@ -95,15 +95,16 @@ namespace PhysisWeather.App.ViewModels
             Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
             ZipCode = Manager?.DemographicData?.CityData?.ZipCode;
 
-            SearchZipCommand = new RelayCommand(() => UpdateAndForecast());
+            SearchZipCommand = new RelayCommand(async () => await InitiateProcessAsync(UpdateAndForecast, SearchZipCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);
             RefreshCommand = new RelayCommand(async () => await InitiateProcessAsync(Manager.Forecast, RefreshCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);
         }
 
         private bool UpdateAndForecast()
         {
-            Task.Run(() => Manager.BuildDemographicData(ZipCode));
+            Manager.SearchZip = ZipCode;
+            Manager.BuildDemographicData();
 
-            Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
+            Manager.Forecast();
 
             return true;
         }
