@@ -225,7 +225,7 @@ namespace PhysisWeather.Core.Services
                     break;
                 default:
                     iconType = WeatherPeriod.IconTypes.NotSet;
-                    _logger.Warning($"Was not able to extrapolate icon from Weather.Gov URL {govIcon}");
+                    _logger.Warning($"Was not able to extrapolate icon from URL {govIcon}");
                     break;
             }
 
