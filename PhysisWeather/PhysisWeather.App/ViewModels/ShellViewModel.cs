@@ -41,6 +41,7 @@ namespace PhysisWeather.App.ViewModels
             //TODO: This seems to break if permission isn't already granted.
             //      Hasn't even been asking to grant permission.
             //      Maybe try to set it up in a switch like template studio does.
+            //      Maybe it needs the dispatcher to ask?
             if (await Geolocator.RequestAccessAsync() == GeolocationAccessStatus.Allowed)
             {
                 Geolocator geolocator = new Geolocator

@@ -93,8 +93,19 @@ namespace PhysisWeather.App.ViewModels
             });
 
             Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
+            ZipCode = Manager?.DemographicData?.CityData?.ZipCode;
 
+            SearchZipCommand = new RelayCommand(() => UpdateAndForecast());
             RefreshCommand = new RelayCommand(async () => await InitiateProcessAsync(Manager.Forecast, RefreshCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);
+        }
+
+        private bool UpdateAndForecast()
+        {
+            Task.Run(() => Manager.BuildDemographicData(ZipCode));
+
+            Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
+
+            return true;
         }
 
         private void Manager_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -123,16 +134,10 @@ namespace PhysisWeather.App.ViewModels
                     ForecastHours = new ObservableCollection<WeatherData>();
                 }
             }
-            //else if (string.Equals(e.PropertyName, nameof(Core.Manager.Coordinates)))
-            //{
-            //    if (Manager?.Coordinates != null)
-            //    {
-            //        DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            //        {
-            //            Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
-            //        });
-            //    }
-            //}
+            else if (string.Equals(e.PropertyName, nameof(Core.Manager.DemographicData)))
+            {
+                ZipCode = Manager?.DemographicData?.CityData?.ZipCode;
+            }
         }
 
         private IEnumerable<WeatherData> BuildDataFromPeriods(List<WeatherPeriod> weatherPeriods)

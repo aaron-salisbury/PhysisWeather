@@ -18,13 +18,16 @@
         <controls:MyAppBar Grid.Row="0" x:Name="AppBar" IsActive="{Binding IsBusy}">
             <controls:MyAppBar.AppBarButtonsPanel>
                 <StackPanel Orientation="Horizontal">
-                    <!-- TODO: Zip search and location info. -->
-                    <!--<controls:MySearchBox Height="30" Width="150" PlaceholderText="Zip Code" />-->
-
+                    <TextBlock 
+                        Text="{Binding Manager.DemographicData.CityData.CityState}"
+                        Margin="0,0,20,0"
+                        VerticalAlignment="Center"/>
+                    
                     <AutoSuggestBox
                         x:Name="ZipCodeSearchBox"
                         VerticalAlignment="Center"
                         PlaceholderText="5 Digit Zip Code"
+                        Text="{Binding ZipCode, Mode=TwoWay}"
                         QueryIcon="Find"
                         Width="150"
                         BorderThickness="0"
@@ -105,7 +108,7 @@
                         <ListView
                                 Grid.Row="1"
                                 x:Name="HoursListView" 
-                                ItemsSource="{x:Bind ViewModel.ForecastHours}" 
+                                ItemsSource="{x:Bind ViewModel.ForecastHours, Mode=OneWay}" 
                                 HorizontalAlignment="Left"
                                 Width="627"
                                 Background="{ThemeResource SystemAccentColor}">

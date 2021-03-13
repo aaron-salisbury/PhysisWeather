@@ -7,6 +7,7 @@ namespace PhysisWeather.Core.Domains
     {
         public string City { get; set; }
         public string State { get; set; }
+        public string CityState { get => $"{City}, {State}"; }
         public string ZipCode { get; set; }
         public string Country { get; set; }
     }
