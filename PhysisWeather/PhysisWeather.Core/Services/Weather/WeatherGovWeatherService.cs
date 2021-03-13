@@ -137,6 +137,13 @@ namespace PhysisWeather.Core.Services
             // weather.gov provides an "Icon" property like "https://api.weather.gov/icons/land/day/skc?size=medium"
             string broadWeatherGovIconType = govIcon?.GetAfterLastOrEmpty("/").GetUntilOrEmpty("?");
 
+            bool isChance = broadWeatherGovIconType.Contains(",");
+
+            if (isChance)
+            {
+                broadWeatherGovIconType = broadWeatherGovIconType.GetUntilOrEmpty(",");
+            }
+
             // weather.gov icons: https://www.weather.gov/forecast-icons
 
             WeatherPeriod.IconTypes iconType;
@@ -154,10 +161,11 @@ namespace PhysisWeather.Core.Services
                     iconType = WeatherPeriod.IconTypes.MostlyClouds;
                     break;
                 case "sn":
-                    iconType = WeatherPeriod.IconTypes.Snow;
+                case "snow":
+                    iconType = isChance ? WeatherPeriod.IconTypes.SnowChance : WeatherPeriod.IconTypes.Snow;
                     break;
                 case "ra_sn":
-                case "raip":
+                case "rain":
                     iconType = WeatherPeriod.IconTypes.RainSnow;
                     break;
                 case "fzra":
@@ -173,12 +181,13 @@ namespace PhysisWeather.Core.Services
                 case "ra":
                 case "shra":
                 case "hi_shwrs":
-                    iconType = WeatherPeriod.IconTypes.Rain;
+                    iconType = isChance ? WeatherPeriod.IconTypes.RainChance : WeatherPeriod.IconTypes.Rain;
                     break;
                 case "tsra":
                 case "scttsra":
                 case "hi_tsra":
-                    iconType = WeatherPeriod.IconTypes.Thunderstorm;
+                case "tsra_hi":
+                    iconType = isChance ? WeatherPeriod.IconTypes.ThunderstormChance : WeatherPeriod.IconTypes.Thunderstorm;
                     break;
                 case "fc":
                 case "tor":
@@ -202,6 +211,7 @@ namespace PhysisWeather.Core.Services
                 case "fu":
                 case "hz":
                 case "fg":
+                case "fog":
                     iconType = WeatherPeriod.IconTypes.Dust_Smoke_Haze_Fog;
                     break;
                 case "hot":

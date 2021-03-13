@@ -24,7 +24,7 @@ namespace PhysisWeather.App.Views
 
         private void BuildDynamicIconGrid()
         {
-            int numberOfRows = 5;
+            int numberOfRows = 6;
             int numberOfColumns = 4;
 
             Grid iconGrid = new Grid();
