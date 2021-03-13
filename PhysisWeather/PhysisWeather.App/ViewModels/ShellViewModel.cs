@@ -51,17 +51,11 @@ namespace PhysisWeather.App.ViewModels
 
                 Geoposition geoposition = await geolocator.GetGeopositionAsync();
 
-                if (geoposition != null && geoposition.Coordinate != null)
+                if (geoposition != null && geoposition.Coordinate != null && geoposition.Coordinate.Point != null)
                 {
-                    if (geoposition.Coordinate != null && geoposition.Coordinate.Point != null)
-                    {
-                        string zip = await BigDataCloudReverseGeocodingService.GetZipAsync(
-                            geoposition.Coordinate.Point.Position.Longitude, 
-                            geoposition.Coordinate.Point.Position.Latitude,
-                            AppLogger);
+                    string zip = await BigDataCloudReverseGeocodingService.GetZipAsync(geoposition, AppLogger);
 
-                        Manager.BuildDemographicData(zip);
-                    }
+                    Manager.BuildDemographicData(zip);
                 }
             }
 

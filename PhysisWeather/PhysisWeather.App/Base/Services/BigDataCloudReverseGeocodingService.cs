@@ -2,7 +2,6 @@
 using PhysisWeather.Core.Base;
 using PhysisWeather.Core.Base.Helpers;
 using PhysisWeather.Core.Data;
-using System;
 using System.Threading.Tasks;
 
 namespace PhysisWeather.App.Base.Services
@@ -17,20 +16,24 @@ namespace PhysisWeather.App.Base.Services
         /// from client devices using their own current coordinates only.
         /// IMPORTANT! Using elsewhere obtained coordinates with BigDataCloud's free API services can lead to blacklisting.
         /// </summary>
-        public static async Task<string> GetZipAsync(double longitude, double latitude, AppLogger appLogger)
+        /// <param name="devicePosition">Client device's current position.</param>
+        public static async Task<string> GetZipAsync(Windows.Devices.Geolocation.Geoposition devicePosition, AppLogger appLogger)
         {
-            try
+            string zip = null;
+            
+            if (devicePosition != null && devicePosition.Coordinate != null && devicePosition.Coordinate.Point != null)
             {
+                double latitude = devicePosition.Coordinate.Point.Position.Latitude;
+                double longitude = devicePosition.Coordinate.Point.Position.Longitude;
+
                 string url = string.Format(URL_FORMAT, latitude, longitude);
                 string json = await WebRequests.GetCurlResponseAsync(url, appLogger.Logger);
                 BigDataCloudRoot root = await Json.ToObjectAsync<BigDataCloudRoot>(json);
 
-                return root?.Postcode;
+                zip = root?.Postcode;
             }
-            catch (Exception e)
-            {
-                return null;
-            }
+
+            return zip;
         }
     }
 }
