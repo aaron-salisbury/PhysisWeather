@@ -5,8 +5,7 @@ Sample UWP weather application to experiment with.
 
 I was adding weather features to another project and realized I had enough to shape a basic weather app. I put it all together here in order to experiment with the platform in general.
 
-
-<img src="https://github.com/aaron-salisbury/PhysisWeather/blob/master/screenshot.png" width="300">
+<img src="https://github.com/aaron-salisbury/PhysisWeather/blob/master/screenshot.png" width="600">
 
 Attributions
 ------------
