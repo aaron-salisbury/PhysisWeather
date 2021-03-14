@@ -181,6 +181,7 @@ namespace PhysisWeather.Core.Services
                 case "ra":
                 case "shra":
                 case "hi_shwrs":
+                case "rain_showers":
                     iconType = isChance ? WeatherPeriod.IconTypes.RainChance : WeatherPeriod.IconTypes.Rain;
                     break;
                 case "tsra":
