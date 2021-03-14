@@ -1,5 +1,6 @@
 ﻿using PhysisWeather.App.ViewModels;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace PhysisWeather.App.Views
 {
@@ -19,9 +20,13 @@ namespace PhysisWeather.App.Views
             ViewModel.WorkflowFailureAction = this.AppBar.AnimateFailure;
         }
 
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            await ViewModel.InitializeLocationAndForecastAsync();
+        }
+
         private void ZipCodeSearchBox_OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            //TODO: Us zip to find coordinats. Then update location fields and conduct forecast.
             ViewModel.SearchZipCommand.Execute(null);
         }
 

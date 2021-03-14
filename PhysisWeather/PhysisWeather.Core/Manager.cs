@@ -57,6 +57,12 @@ namespace PhysisWeather.Core
 
         public bool BuildDemographicData()
         {
+            if (string.IsNullOrEmpty(SearchZip))
+            {
+                _logger.Warning("Cannot build demographic data without a zip code.");
+                return false;
+            }
+
             Coordinates coordinates = null;
             try
             {

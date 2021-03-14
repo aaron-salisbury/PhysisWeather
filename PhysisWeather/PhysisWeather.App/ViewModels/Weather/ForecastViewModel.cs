@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
+using PhysisWeather.App.Base.Services;
 using PhysisWeather.App.Models;
 using PhysisWeather.Core.Domains;
 using System;
@@ -30,6 +31,7 @@ namespace PhysisWeather.App.ViewModels
             set
             {
                 Set(ref _zipCode, value);
+                Manager.SearchZip = value;
             }
         }
 
@@ -92,16 +94,26 @@ namespace PhysisWeather.App.ViewModels
                 LoadForecastIconCache();
             });
 
-            Task.Run(() => InitiateProcessAsync(Manager.Forecast, null));
-            ZipCode = Manager?.DemographicData?.CityData?.ZipCode;
-
             SearchZipCommand = new RelayCommand(async () => await InitiateProcessAsync(UpdateAndForecast, SearchZipCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);
             RefreshCommand = new RelayCommand(async () => await InitiateProcessAsync(Manager.Forecast, RefreshCommand, WorkflowSuccessAction, WorkflowFailureAction), () => !IsBusy);
         }
 
+        internal async Task InitializeLocationAndForecastAsync()
+        {
+            if (Manager.DemographicData == null)
+            {
+                //TODO: This should turn on the is busy progress wheel.
+                ZipCode = await LocationService.GetZipForGeopositionAsync(AppLogger);
+
+                if (!string.IsNullOrEmpty(ZipCode))
+                {
+                    SearchZipCommand.Execute(null);
+                }
+            }
+        }
+
         private bool UpdateAndForecast()
         {
-            Manager.SearchZip = ZipCode;
             Manager.BuildDemographicData();
 
             Manager.Forecast();
@@ -134,10 +146,6 @@ namespace PhysisWeather.App.ViewModels
                     ForecastDays = new ObservableCollection<WeatherData>();
                     ForecastHours = new ObservableCollection<WeatherData>();
                 }
-            }
-            else if (string.Equals(e.PropertyName, nameof(Core.Manager.DemographicData)))
-            {
-                ZipCode = Manager?.DemographicData?.CityData?.ZipCode;
             }
         }
 

@@ -138,6 +138,7 @@
     <Compile Include="Base\Helpers\UI.cs" />
     <Compile Include="Base\Services\ActivationService.cs" />
     <Compile Include="Base\Services\BigDataCloudReverseGeocodingService.cs" />
+    <Compile Include="Base\Services\LocationService.cs" />
     <Compile Include="Base\Services\NavigationServiceEx.cs" />
     <Compile Include="Base\Services\ServiceDomains\BigDataCloud\BigDataCloudAdministrative.cs" />
     <Compile Include="Base\Services\ServiceDomains\BigDataCloud\BigDataCloudInformative.cs" />
