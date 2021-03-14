@@ -47,12 +47,12 @@ namespace PhysisWeather.Core
             }
         }
 
-        public Manager(AppLogger appLogger)
+        public Manager(AppLogger appLogger, string applicationIdentifier)
         {
             _logger = appLogger.Logger;
             _coordinateService = new FrostlineCoordinateService(_logger);
             _cityService = new ZiptasticCityService(_logger);
-            _weatherService = new WeatherGovWeatherService(_logger);
+            _weatherService = new WeatherGovWeatherService(_logger, applicationIdentifier);
         }
 
         public bool BuildDemographicData()

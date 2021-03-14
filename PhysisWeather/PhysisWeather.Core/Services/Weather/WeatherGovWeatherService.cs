@@ -18,14 +18,16 @@ namespace PhysisWeather.Core.Services
         private const string URL_FORMAT_GRIDS = "https://api.weather.gov/points/{0},{1}"; // {0}Latitude, {1}Longitude
 
         private ILogger _logger { get; set; }
-        private Guid _sessionGuid { get; set; }
         private int _attemptCounter { get; set; }
 
-        public WeatherGovWeatherService(ILogger logger)
+        public string UserAgent { get; set; }
+
+        public WeatherGovWeatherService(ILogger logger, string userAgent = null)
         {
             _logger = logger;
-            _sessionGuid = Guid.NewGuid();
             _attemptCounter = 1;
+
+            UserAgent = !string.IsNullOrEmpty(userAgent) ? userAgent : Guid.NewGuid().ToString();
         }
 
         public async Task<WeatherForecast> GetWeatherDataAsync(Coordinates coordinates)
@@ -38,7 +40,7 @@ namespace PhysisWeather.Core.Services
                 {
                     Dictionary<string, string> requestHeaders = new Dictionary<string, string>
                     {
-                        { "User-Agent", $"AtaraxiaGarden-{_sessionGuid}" } //TODO: It would be nice to use a device ID instead of a Guid. https://stackoverflow.com/questions/34153786/unique-device-id-uwp
+                        { "User-Agent", UserAgent }
                     };
 
                     string urlGrids = string.Format(URL_FORMAT_GRIDS, coordinates.Latitude, coordinates.Longitude);

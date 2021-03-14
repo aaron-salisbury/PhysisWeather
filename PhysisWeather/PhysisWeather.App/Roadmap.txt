@@ -8,7 +8,7 @@
 ☑ Get zip using location service coordinates.
 ☑ Add screenshot to Readme.md
 ☑ Location service breaks when app doesn't already have user authorization.
+☑ Have UserAgent be a required parameter of the weather service so calls can be distinguished by device ID.
    The is busy progress wheel doesn't start until the end of the forecast. This should be fixed since it isn't obvious that forecast is running when page is nagivated to.
    Add link in settings page to launch windows settings app so users can update their location preference for the app.
    Background service to refresh on a regular interval.
-   Have UserAgent be a required parameter of the weather service so calls can be distinguished by device ID.
