@@ -6,9 +6,9 @@
 ☑ Zip code search.
 ☑ General location info on screen, like city and state.
 ☑ Get zip using location service coordinates.
+☑ Add screenshot to Readme.md
    Location service breaks when app doesn't already have user authorization.
    Save zip locally and default search value with it.
    Background service to refresh on a regular interval.
-   Add screenshot to Readme.md
    Save weather service grid data locally to save a call when coordinates are the same.
    Have UserAgent be a required parameter of the weather service so calls can be distinguished by device ID.
