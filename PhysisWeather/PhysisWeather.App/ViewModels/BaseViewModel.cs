@@ -57,10 +57,6 @@ namespace PhysisWeather.App.ViewModels
                 IsBusy = true;
                 await InitiateProcess(longRunningFunction, successAction, failureAction).ConfigureAwait(false);
             }
-            catch (Exception e)
-            {
-                string wtf = e.Message;
-            }
             finally
             {
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>

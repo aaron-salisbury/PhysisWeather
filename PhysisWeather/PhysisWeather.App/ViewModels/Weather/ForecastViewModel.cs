@@ -102,8 +102,9 @@ namespace PhysisWeather.App.ViewModels
         {
             if (Manager.DemographicData == null)
             {
-                //TODO: This should turn on the is busy progress wheel.
+                IsBusy = true;
                 ZipCode = await LocationService.GetZipForGeopositionAsync(AppLogger);
+                IsBusy = false;
 
                 if (!string.IsNullOrEmpty(ZipCode))
                 {
