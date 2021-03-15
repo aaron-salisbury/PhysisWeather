@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -63,6 +64,11 @@ namespace PhysisWeather.App.Base.Services
             Helpers.UI.ApplyColorToTitleBar(mainColor);
 
             await ThemeSelectorService.InitializeAsync().ConfigureAwait(false);
+
+            BackgroundTaskBuilder forecastTaskBuilder = new BackgroundTaskBuilder() { Name = "ForecastBackgroundTask" };
+            forecastTaskBuilder.SetTrigger(new TimeTrigger(15, false));
+            forecastTaskBuilder.AddCondition(new SystemCondition(SystemConditionType.UserPresent));
+            forecastTaskBuilder.Register();
         }
 
         private async Task HandleActivationAsync(object activationArgs)

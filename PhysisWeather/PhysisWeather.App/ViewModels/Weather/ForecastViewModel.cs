@@ -114,9 +114,12 @@ namespace PhysisWeather.App.ViewModels
 
         private bool UpdateAndForecast()
         {
-            Manager.BuildDemographicData();
+            if (!string.IsNullOrEmpty(ZipCode))
+            {
+                Manager.BuildDemographicData();
 
-            Manager.Forecast();
+                Manager.Forecast();
+            }
 
             return true;
         }

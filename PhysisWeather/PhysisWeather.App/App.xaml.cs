@@ -54,5 +54,12 @@ namespace PhysisWeather.App
             GalaSoft.MvvmLight.Threading.DispatcherHelper.Initialize();
             return new ShellPage();
         }
+
+        protected override void OnBackgroundActivated(BackgroundActivatedEventArgs args)
+        {
+            base.OnBackgroundActivated(args);
+
+            ViewModels.ViewModelLocator.Current.ForecastViewModel.RefreshCommand.Execute(null);
+        }
     }
 }

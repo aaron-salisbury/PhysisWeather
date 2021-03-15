@@ -71,21 +71,23 @@
 
                 <telerikPrimitives:RadCustomHubTile Width="315" Height="155" VariableSizedWrapGrid.ColumnSpan="4" VariableSizedWrapGrid.RowSpan="2" Background="{ThemeResource SystemAccentColor}">
                     <telerikPrimitives:RadCustomHubTile.FrontContent>
-                        <Grid Margin="16,16,16,12">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,3">
-                                <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.NameAllCaps}" FontSize="26" FontWeight="Light" />
-                                <ContentControl Template="{Binding NextWeatherData.Icon, Mode=OneWay}" Height="120" HorizontalAlignment="Left" Margin="25,-5,-40,-79" />
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,-2,0,0">
-                                    <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.Temperature}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                        <ScrollViewer>
+                            <Grid Margin="16,16,16,12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,3">
+                                    <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.NameAllCaps}" FontSize="26" FontWeight="Light" />
+                                    <ContentControl Template="{Binding NextWeatherData.Icon, Mode=OneWay}" Height="110" HorizontalAlignment="Left" Margin="25,-5,-40,-79" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,-2,0,0">
+                                        <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.Temperature}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding NextWeatherData.WeatherPeriod.TemperatureTypeShort}" FontSize="26" FontWeight="Light" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                            <TextBlock Grid.Row="1" Text="{Binding NextWeatherData.WeatherPeriod.LongDescription}" FontSize="15" FontWeight="Light" HorizontalAlignment="Left" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
-                        </Grid>
+                                <TextBlock Grid.Row="1" Text="{Binding NextWeatherData.WeatherPeriod.LongDescription}" FontSize="15" FontWeight="Light" HorizontalAlignment="Left" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
+                            </Grid>
+                        </ScrollViewer>
                     </telerikPrimitives:RadCustomHubTile.FrontContent>
                 </telerikPrimitives:RadCustomHubTile>
 
