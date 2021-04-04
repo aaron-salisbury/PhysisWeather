@@ -15,6 +15,8 @@ namespace PhysisWeather.App
             InitializeComponent();
             DataContext = ViewModel;
             ViewModel.Initialize(shellFrame, navigationView, KeyboardAccelerators);
+
+            navigationView.IsPaneOpen = false;
         }
     }
 }
